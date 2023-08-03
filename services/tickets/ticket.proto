@@ -1,0 +1,116 @@
+syntax = "proto3";
+
+option go_package = "github.com/dzwiedz90/helpdesk-proto/services/tickets";
+
+import "google/protobuf/timestamp.proto";
+
+import "services/users/users.proto";
+import "services/agents/agents.proto";
+import "services/tickets/comment.proto";
+
+enum TicketState {
+    NEW_TICKET = 0;
+    BACKLOG = 1;
+    IN_PROGRESS = 2;
+    TESTING = 3;
+    DONE = 4;
+}
+
+enum TicketType {
+    NETWORK = 0;
+    PHONE = 1;
+    HARDWARE = 2;
+    SOFTWARE = 3;
+    ERP = 4;
+}
+
+enum TicketPriority {
+    LOW = 0;
+    MEDIUM = 1;
+    HIGH = 2;
+    CRITICAL = 3;
+}
+
+message TicketSubscribedUsers {
+    repeated Agent subsribed_agents = 1;
+    repeated User subsribed_users = 2;
+}
+
+message Ticket {
+    int64 id = 1;
+    TicketState state = 2;
+    User user_reporting = 3;
+    Agent assignee = 4;
+    string ticket_title = 5;
+    string ticket_description = 6;
+    TicketType ticket_type = 7;
+    TicketPriority ticket_priority = 8;
+    TicketSubscribedUsers list_of_subscribers = 9;
+    repeated Comment comments = 10;
+    google.protobuf.Timestamp created_at = 11;
+    google.protobuf.Timestamp closed_at = 12;
+}
+
+message CreateTicketRequest {
+    Ticket ticket = 1;
+}
+
+message CreateTicketResponse {
+    int64 id = 1;
+}
+
+message GetAllTicketsRequest {}
+
+message GetAllTicketsResponse {
+    repeated Ticket tickets = 1;
+}
+
+message GetAllTicketsByUserRequest {
+    int64 user_id = 1;
+}
+
+message GetAllTicketsByUserResponse {
+    repeated Ticket tickets = 1;
+}
+
+message GetAllTicketsByAgentRequest {
+    int64 agent_id = 1;
+}
+
+message GetAllTicketsByAgentResponse {
+    repeated Ticket tickets = 1;
+}
+
+message GetTicketRequest {
+    int64 id = 1;
+}
+
+message GetTicketResponse {
+    Ticket ticket = 1;
+}
+
+message UpdateTicketRequest {
+    Ticket ticket = 1;
+}
+
+message UpdateTicketResponse {
+    int64 id = 1;
+}
+
+message DeleteTicketRequest {
+    int64 id = 1;
+}
+
+message DeleteTicketResponse {
+    int64 id = 1;
+}
+
+service TicketService {
+    rpc CreateTicket (CreateTicketRequest) returns (CreateTicketResponse);
+    rpc GetAllTickets (GetAllTicketsRequest) returns (GetAllTicketsResponse);
+    rpc GetAllTicketsByUser (GetAllTicketsByUserRequest) returns (GetAllTicketsByUserResponse);
+    rpc GetAllTicketsByAgent (GetAllTicketsByAgentRequest) returns (GetAllTicketsByAgentResponse);
+    rpc GetTicket (GetTicketRequest) returns (GetTicketResponse);
+    rpc UpdateTicket (UpdateTicketRequest) returns (UpdateTicketResponse);
+    rpc DeleteTicket (DeleteTicketRequest) returns (DeleteTicketResponse);
+}

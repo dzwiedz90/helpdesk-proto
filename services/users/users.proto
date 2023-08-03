@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+option go_package = "github.com/dzwiedz90/helpdesk-proto/services/users";
+
+import "common/location.proto";
+
+message User {
+    int64 user_id = 1;
+    string username = 2;
+    string password = 3;
+    string email = 4;
+    string firstName = 5;
+    string lastName = 6;
+    int32 age = 7;
+    string gender = 8;
+    Address address = 9;
+}
+
+message CreateUserRequest {
+    User user = 1;
+}
+
+message CreateUserResponse {
+    int64 id = 1;
+}
+
+message GetUserRequest {
+    int64 id = 1;
+}
+
+message GetUserResponse {
+    User user = 1;
+}
+
+message GetAllUsersRequest {}
+
+message GetAllUsersResponse {
+    repeated User users = 1;
+}
+
+message UpdateUserRequest {
+    User user = 1;
+}
+
+message UpdateUserResponse {}
+
+message DeleteUserRequest {
+    int64 id = 1;
+}
+
+message DeleteUserResponse {}
+
+service UsersService {
+    rpc CreateUser (CreateUserRequest) returns (CreateUserResponse);
+    rpc GetUser (GetUserRequest) returns (GetUserResponse);
+    rpc GetAllUsers (GetAllUsersRequest) returns (GetAllUsersResponse);
+    rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse);
+    rpc DeleteUser (DeleteUserRequest) returns (DeleteUserResponse);
+}

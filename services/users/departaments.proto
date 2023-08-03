@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option go_package = "github.com/dzwiedz90/helpdesk-proto/services/users";
+
+import "services/users/users.proto";
+
+enum DepartamentType {
+    HUMAN_RESOURCES = 0;
+    FINANCES = 1;
+    SALES_AND_MARKETING = 2;
+    CUSTOMER_SERVICE = 3;
+    LEGAL = 4;
+    PRODUCTION = 5;
+    QUALITY_ASSURANCE = 6;
+}
+
+message Departament {
+    int64 id = 1;
+    DepartamentType departament_type = 2;
+    repeated User users = 3;
+}

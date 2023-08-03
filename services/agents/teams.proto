@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option go_package = "github.com/dzwiedz90/helpdesk-proto/services/agents";
+
+import "services/agents/agents.proto";
+
+enum TeamType {
+    NETWORK = 0;
+    DEVELOPMENT = 1;
+    HARDWARE = 2;
+    SOFTWARE = 3;
+    ERP = 4;
+    DATABASES = 5;
+}
+
+message Team {
+    int64 id = 1;
+    TeamType team_type = 2;
+    repeated Agent agents_list = 3; 
+}

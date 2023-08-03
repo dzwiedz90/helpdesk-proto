@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+option go_package = "github.com/dzwiedz90/helpdesk-proto/services/notifications";
+
+import "services/agents/agents.proto";
+import "services/tickets/ticket.proto";
+import "services/users/users.proto";
+
+enum NotificationTypes {
+    COMMENT_ADDED = 0;
+    STATE_CHANGED = 1;
+    AGENT_ASSIGNED = 2;
+    AGENT_ASSIGNED_CHANGED = 3;
+    TITLE_CHANGED = 4;
+    DESCRIPTION_CHANGED = 5;
+    TYPE_CHANGED = 6;
+    PRIORITY_CHANGED = 7;
+    TICKET_CLOSED = 8;
+}
+
+message NotificationSubscribedUsers {
+    repeated Agent agents = 1;
+    repeated User users = 2;
+}
+
+message Notification {
+    int64 id = 1;
+    NotificationSubscribedUsers subscribed_users = 2;
+    Ticket ticket = 3;
+}
+
+message CreateNotificationRequest {
+    Notification notification = 1;
+}
+
+message CreateNotificationResponse {
+    int64 id = 1;
+}
+
+message GetAllNotificationsRequest {}
+
+message GetAllNotificationsResponse {
+    repeated Notification notifications = 1;
+}
+
+message GetAllNotificationsByUserRequest {
+    int64 id = 1;
+}
+
+message GetAllNotificationsByUserResponse {
+    repeated Notification notifications = 1;
+}
+
+message GetAllNotificationsByAgentRequest {
+    int64 id = 1;
+}
+
+message GetAllNotificationsByAgentResponse {
+    repeated Notification notifications = 1;
+}
+
+message SendNotificationsRequest {}
+
+message SendNotificationsResponse {}
+
+service NotificationsService {
+    rpc CreateNotification (CreateNotificationRequest) returns (CreateNotificationResponse);
+    rpc GetAllNotifications (GetAllNotificationsRequest) returns (GetAllNotificationsResponse);
+    rpc GetAllNotificationsByUser (GetAllNotificationsByUserRequest) returns (GetAllNotificationsByUserResponse);
+    rpc GetAllNotificationsByAgent (GetAllNotificationsByAgentRequest) returns (GetAllNotificationsByAgentResponse);
+    rpc SendNotifications (SendNotificationsRequest) returns (SendNotificationsResponse);
+}

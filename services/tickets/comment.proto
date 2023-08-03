@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+option go_package = "github.com/dzwiedz90/helpdesk-proto/services/tickets";
+
+import "google/protobuf/timestamp.proto";
+
+message Comment {
+    int64 id = 1;
+    int64 comment_creator_id = 2;
+    string comment_description = 3;
+    string attachement = 4;
+    google.protobuf.Timestamp created_at = 5;
+}
+
+message CreateCommentRequest {
+    Comment comment = 1;
+}
+
+message CreateCommentResponse {
+    int64 id = 1;
+}
+
+message GetCommentRequest {
+    int64 id = 1;
+}
+
+message GetCommentResponse {
+    Comment comment = 1;
+}
+
+message GetAllCommentsByTicketRequest {
+    int64 ticket_id = 1;
+}
+
+message GetAllCommentsByTicketResponse {
+    repeated Comment comments = 1;
+}
+
+message UpdateCommentRequest {
+    Comment comment = 1;
+}
+
+message UpdateCommentResponse {}
+
+message DeleteCommentRequest {
+    int64 id = 1;
+}
+
+message DeleteCommentResponse {}
+
+service CommentService {
+    rpc CreateComment (CreateCommentRequest) returns (CreateCommentResponse);
+    rpc GetComment (GetCommentRequest) returns (GetCommentResponse);
+    rpc GetAllCommentsByTicket (GetAllCommentsByTicketRequest) returns (GetAllCommentsByTicketResponse);
+    rpc UpdateComment (UpdateCommentRequest) returns (UpdateCommentResponse);
+    rpc DeleteComment (DeleteCommentRequest) returns (DeleteCommentResponse);
+}

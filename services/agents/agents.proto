@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+option go_package = "github.com/dzwiedz90/helpdesk-proto/services/agents";
+
+import "services/users/users.proto";
+
+message Agent {
+    User user = 1;
+    bool isAdmin = 2;
+}
+
+message CreateAgentRequest {
+    Agent Agent = 1;
+    string team = 2;
+}
+
+message CreateAgentResponse {
+    int64 id = 1;
+}
+
+message GetAgentRequest {
+    int64 agent_id = 1;
+}
+
+message GetAgentResponse {
+    Agent agent = 1;
+}
+
+message GetAllAgentsRequest {}
+
+message GetAllAgentsResponse {
+    repeated Agent agents = 1;
+}
+
+message UpdateAgentRequest {
+    Agent agent = 1;
+}
+
+message UpdateAgentResponse {}
+
+message DeleteAgentRequest {
+    int64 id = 1;
+}
+
+message DeleteAgentResponse {}
+
+service AgentsService {
+    rpc CreateAgent (CreateAgentRequest) returns (CreateAgentResponse);
+    rpc GetAgent (GetAgentRequest) returns (GetAgentResponse);
+    rpc GetAllAgents (GetAllAgentsRequest) returns (GetAllAgentsResponse);
+    rpc UpdateAgent (UpdateAgentRequest) returns (UpdateAgentResponse);
+    rpc DeleteAgent (DeleteAgentRequest) returns (DeleteAgentResponse);
+}
