@@ -7,7 +7,7 @@
 package users
 
 import (
-	common "github.com/dzwiedz90/helpdesk-proto/proto/common"
+	common "github.com/dzwiedz90/helpdesk-proto/common"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
