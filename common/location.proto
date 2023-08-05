@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "github.com/dzwiedz90/helpdesk-proto/proto/common";
+option go_package = "github.com/dzwiedz90/helpdesk-proto/common";
 
 message Address {
     string street = 1;
