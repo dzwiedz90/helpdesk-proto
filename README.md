@@ -8,14 +8,14 @@
 - Uses the [Protocol Buffers](https://protobuf.dev/)
 - Uses [gRPC](https://grpc.io/)
 
-## Helpdesk has below services:
+### Helpdesk has below services:
 
-- Proto
+- [Proto](https://github.com/dzwiedz90/helpdesk-proto)
 - [service-agents]() - to manage agents
-- [service-frontend]() - to serve frontend UI of application and communicate with other services when necessary
+- [service-frontend](https://github.com/dzwiedz90/helpdesk-service-frontend) - to serve frontend UI of application and communicate with other services when necessary
 - [service-notifications]() - to manage and send notification about events for tickets
 - [service-tickets]() - to manage tickets
-- [service-users]() - to manage users
+- [service-users](https://github.com/dzwiedz90/helpdesk-service-users) - to manage users
 
 
 ## Generate proto files
